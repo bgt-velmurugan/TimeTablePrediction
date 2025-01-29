@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Timetable Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 10px; }
+        input, textarea { margin-bottom: 10px; padding: 5px; }
+        button { margin-top: 10px; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .error { color: red; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Automatic Timetable Generator</h1>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="POST">
+        <label for="department">Department Name:</label>
+        <input type="text" id="department" name="department" required>
+
+        <label for="classes_per_day">Number of Classes per Day:</label>
+        <input type="number" id="classes_per_day" name="classes_per_day" required min="1">
+
+        <label for="days_per_week">Number of Days Classes in a Week:</label>
+        <input type="number" id="days_per_week" name="days_per_week" required min="1" max="6">
+
+        <label for="staff_subjects">Staff and Subjects (format: Staff:Subject, comma-separated):</label>
+        <textarea id="staff_subjects" name="staff_subjects" required placeholder="John Doe:English Literature, Jane Smith:History, ..."></textarea>
+
+        <button type="submit">Generate Timetable</button>
+    </form>
+    <br>
+    <a href="{{ url_for('list_timetables') }}">View Saved Timetables</a>
+</body>
+</html>
+
